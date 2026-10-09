@@ -22,9 +22,7 @@
 
 ## O problema
 
-**Tema sorteado:** {{tema}}
-
-🏭 Indústria e Manufatura
+**Tema sorteado:** 🏭 Indústria e Manufatura
 
 **Quem usa o sistema:**
 
