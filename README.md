@@ -37,9 +37,9 @@
 
 | # | Regra | Onde está no código | Rota que usa |
 |---|---|---|---|
-| R1 *(exemplo)* | Um leitor não pode ter mais de 3 empréstimos em aberto | `EmprestimoService` | `POST /emprestimos` |
-| R2 | ... | ... | ... |
-| R3 | ... | ... | ... |
+| R1 | Uma ordem de produção só pode ser iniciada se o equipamento associado estiver no estado ATIVO. Se estiver em manutenção ou inativo, o sistema devolve HTTP 400 Bad Request. | `EmprestimoService` | `POST /emprestimos` |
+| R2 | Não é permitido registar uma inspeção de qualidade com quantidade de peças inspecionadas superior à quantidade total produzida na respetiva ordem de produção (devolve HTTP 400 Bad Request). | ... | ... |
+| R3 | Se mais de 10% das peças inspecionadas forem reprovadas num teste de qualidade, o equipamento associado deve ter o seu estado automaticamente alterado para MANUTENCAO_PENDENTE e a ordem de produção é suspensa. | ... | ... |
 
 ## Tecnologias
 
