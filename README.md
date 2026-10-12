@@ -1,5 +1,9 @@
 # Industria Backend
 
+Sistema para o chão de fábrica controlar a operação de equipamentos, o andamento de ordens de produção e os testes de inspeção de qualidade.
+
+Projeto Final da disciplina de Backend (Engenharia de Software, SATC). **Etapa 1: arquitetura do backend.**
+
 ## Índice
 
 - [Integrantes](#integrantes)
@@ -24,22 +28,23 @@
 
 **Tema sorteado:** 🏭 Indústria e Manufatura
 
+No dia a dia de uma fábrica, é comum começarem a fabricar peças em máquinas que estão com defeito ou precisando de conserto, porque a equipe não foi avisada a tempo. Outro grande problema é que, quando as peças começam a sair com defeito, a máquina continua ligada gerando desperdício de material. O sistema resolve isso: ele só deixa iniciar a produção se a máquina estiver funcionando normalmente e suspende a ordem de produção na hora se o teste de qualidade reprovar muitas peças.
+
 **Quem usa o sistema:**
 
 | Quem | O que faz no sistema |
 |---|---|
-|  Supervisor de linha de produção *Rafael* | Supervisa a linha de produção |
-|  Operador de máquinas *Tiago* | Operado as máquinas |
-|  Técnicos de manutenção industrial *Gabriel* | Cuida da manutenção industrial |
-| ... | ... |
+| Supervisor de linha de produção | Cadastra equipamentos e acompanha ordens de produção na fábrica |
+| Operador de máquinas | Aponta a produção e registra inspeções de qualidade nas ordens |
+| Técnico de manutenção industrial | Monitora o estado dos equipamentos e atua em máquinas com manutenção pendente |
 
-**Regras de negócio.** No mínimo 3, criadas pelo grupo a partir do problema: o que o sistema precisa garantir ou impedir. Precisam atender à necessidade do tema e estar implementadas no código. O que só confere formato (campo obrigatório, número positivo) é validação do DTO, não regra de negócio.
+**Regras de negócio:**
 
 | # | Regra | Onde está no código | Rota que usa |
 |---|---|---|---|
-| R1 | Uma ordem de produção só pode ser iniciada se o equipamento associado estiver no estado ATIVO. Se estiver em manutenção ou inativo, o sistema devolve HTTP 400 Bad Request. | `EmprestimoService` | `POST /emprestimos` |
-| R2 | Não é permitido registar uma inspeção de qualidade com quantidade de peças inspecionadas superior à quantidade total produzida na respetiva ordem de produção (devolve HTTP 400 Bad Request). | ... | ... |
-| R3 | Se mais de 10% das peças inspecionadas forem reprovadas num teste de qualidade, o equipamento associado deve ter o seu estado automaticamente alterado para MANUTENCAO_PENDENTE e a ordem de produção é suspensa. | ... | ... |
+| R1 | Uma ordem de produção só pode ser iniciada se o equipamento associado estiver no estado ATIVO. Se estiver em manutenção ou inativo, o sistema devolve HTTP 400 Bad Request. | `OrdemProducaoService` | `POST /ordens-producao` |
+| R2 | Não é permitido registrar uma inspeção de qualidade com quantidade de peças inspecionadas superior à quantidade total produzida na respectiva ordem de produção (devolve HTTP 400 Bad Request). | `InspecaoQualidadeService` | `POST /inspecoes-qualidade` |
+| R3 | Se mais de 10% das peças inspecionadas forem reprovadas num teste de qualidade, o equipamento associado deve ter o seu estado automaticamente alterado para MANUTENCAO_PENDENTE e a ordem de produção é suspensa. | `InspecaoQualidadeService` | `POST /inspecoes-qualidade` |
 
 ## Tecnologias
 
@@ -59,15 +64,17 @@ A API é organizada em camadas. Uma requisição entra pelo Controller, passa pe
 
 | Entidade | Migration | Model | Repository | DTOs | Mapper | Service | Controller |
 |---|---|---|---|---|---|---|---|
-| Livro *(exemplo)* | `V1__criar_livros.sql`, pronta | `Livro`, pronta | `LivroRepository`, pronto | `LivroRequestDTO`, `LivroResponseDTO`, prontos | `LivroMapper`, implementado | `LivroService`, implementado | `LivroController`, implementado |
-| ... | ... | ... | ... | ... | ... | ... | ... |
+| `Equipamento` | `V1__criar_tabela_equipamentos.sql`, a fazer | `Equipamento`, a fazer | `EquipamentoRepository`, a fazer | `EquipamentoRequestDTO`, `EquipamentoResponseDTO`, a fazer | `EquipamentoMapper`, a fazer | `EquipamentoService`, a fazer | `EquipamentoController`, a fazer |
+| `OrdemProducao` | `V2__criar_tabela_ordens_producao.sql`, a fazer | `OrdemProducao`, a fazer | `OrdemProducaoRepository`, a fazer | `OrdemProducaoRequestDTO`, `OrdemProducaoResponseDTO`, a fazer | `OrdemProducaoMapper`, a fazer | `OrdemProducaoService`, a fazer | `OrdemProducaoController`, a fazer |
+| `InspecaoQualidade` | `V3__criar_tabela_inspecoes_qualidade.sql`, a fazer | `InspecaoQualidade`, a fazer | `InspecaoQualidadeRepository`, a fazer | `InspecaoQualidadeRequestDTO`, `InspecaoQualidadeResponseDTO`, a fazer | `InspecaoQualidadeMapper`, a fazer | `InspecaoQualidadeService`, a fazer | `InspecaoQualidadeController`, a fazer |
 
 ## Entidades
 
 | Entidade | O que representa | Como se relaciona |
 |---|---|---|
-| Livro *(exemplo)* | Um exemplar do acervo que pode ser emprestado | Aparece em vários empréstimos |
-| ... | ... | ... |
+| `Equipamento` | Máquina ou equipamento fabril | Possui várias ordens de produção |
+| `OrdemProducao` | Ordem de fabricação executada em um equipamento | Vinculada a um equipamento e recebe inspeções de qualidade |
+| `InspecaoQualidade` | Checagem de amostragem de peças produzidas | Vinculada a uma ordem de produção |
 
 Atributos, tipos e o diagrama das tabelas estão em [docs/modelo-de-dominio.md](docs/modelo-de-dominio.md).
 
@@ -77,19 +84,19 @@ Atributos, tipos e o diagrama das tabelas estão em [docs/modelo-de-dominio.md](
 
 | Verbo | Caminho | O que faz | Regra | Sucesso | Erros |
 |---|---|---|---|---|---|
-| `POST` *(exemplo)* | `/livros` | Cadastra um livro | Nenhuma | `201` | `400` |
-| `POST` *(exemplo)* | `/emprestimos` | Registra um empréstimo | R1 e R2 | `201` | `400`, `404` |
 | ... | ... | ... | ... | ... | ... |
 
-Exemplo de requisição *(exemplo: troque por uma rota do grupo)*:
+Exemplo de requisição:
 
 ```http
-POST /livros
+POST /equipamentos
 Content-Type: application/json
 
 {
-  "titulo": "Dom Casmurro",
-  "isbn": "978-85-359-0277-5"
+  "nome": "Torno Mecânico CNC",
+  "codigo": "TRN-001",
+  "setor": "Usinagem",
+  "estado": "ATIVO"
 }
 ```
 
@@ -98,23 +105,24 @@ Resposta, `201 Created`:
 ```json
 {
   "id": 1,
-  "titulo": "Dom Casmurro",
-  "isbn": "978-85-359-0277-5",
-  "disponivel": true
+  "nome": "Torno Mecânico CNC",
+  "codigo": "TRN-001",
+  "setor": "Usinagem",
+  "estado": "ATIVO"
 }
 ```
 
 ### Erros
 
-Todo erro sai no mesmo formato. Este é o `400` de uma regra de negócio violada *(exemplo)*:
+Todo erro sai no mesmo formato. Este é o `400` de uma regra de negócio violada (R1):
 
 ```json
 {
   "status": 400,
   "erro": "Bad Request",
-  "mensagem": "R2: o livro já está emprestado",
-  "caminho": "/emprestimos",
-  "timestamp": "2026-10-06T19:30:00",
+  "mensagem": "R1: o equipamento associado deve estar no estado ATIVO para iniciar a ordem de produção",
+  "caminho": "/ordens-producao",
+  "timestamp": "2026-10-12T14:30:00",
   "campos": []
 }
 ```
@@ -123,11 +131,7 @@ Um campo inválido também devolve `400`, com a lista `campos` dizendo qual camp
 
 ### As planejadas
 
-Estão no contrato, mas ainda não respondem.
-
-| Recurso | O que vai fazer |
-|---|---|
-| ... | ... |
+Estão no contrato, mas ainda não respondem nesta primeira etapa: `PUT /equipamentos/{id}`, `DELETE /equipamentos/{id}`, `GET /ordens-producao`, etc.
 
 O contrato completo, com todas as rotas e os DTOs, está em [docs/contrato-da-api.md](docs/contrato-da-api.md).
 
@@ -136,8 +140,8 @@ O contrato completo, com todas as rotas e os DTOs, está em [docs/contrato-da-ap
 Pré-requisitos: JDK 25, Docker Desktop aberto e Git.
 
 ```bash
-git clone https://github.com/{{usuario}}/{{repositorio}}.git
-cd {{repositorio}}
+git clone https://github.com/gabrieltomazi/industria-backend.git
+cd industria-backend
 
 docker compose up -d          # sobe o PostgreSQL na porta 5437
 ./mvnw spring-boot:run        # Windows: .\mvnw.cmd spring-boot:run
@@ -158,11 +162,9 @@ Para parar: `Ctrl+C` na API e `docker compose stop` no banco. Para apagar o banc
 
 | Parte | Situação |
 |---|---|
-| Desenho | {{ex.: completo: problema e regras neste README, modelo e contrato em docs/}} |
-| Estrutura | {{ex.: as 3 entidades têm migration, entidade, Repository, DTOs, Mapper, Service e Controller}} |
-| API e regras | {{ex.: as rotas de livros funcionam; R1, R2 e R3 estão implementadas}} |
-
-**Ainda não funciona:** {{as rotas planejadas que ainda não respondem}}
+| Desenho | Completo: problema e regras neste README, modelo e contrato em docs/ |
+| Estrutura | Em andamento: migrations, entidades, repositories, DTOs, mappers, services e controllers das 3 entidades |
+| API e regras | Em andamento: API simples de equipamentos e implementação de R1, R2 e R3 |
 
 ## Documentação
 
