@@ -64,9 +64,9 @@ A API é organizada em camadas. Uma requisição entra pelo Controller, passa pe
 
 | Entidade | Migration | Model | Repository | DTOs | Mapper | Service | Controller |
 |---|---|---|---|---|---|---|---|
-| `Equipamento` | `V1__criar_tabela_equipamentos.sql`, a fazer | `Equipamento`, a fazer | `EquipamentoRepository`, a fazer | `EquipamentoRequestDTO`, `EquipamentoResponseDTO`, a fazer | `EquipamentoMapper`, a fazer | `EquipamentoService`, a fazer | `EquipamentoController`, a fazer |
-| `OrdemProducao` | `V2__criar_tabela_ordens_producao.sql`, a fazer | `OrdemProducao`, a fazer | `OrdemProducaoRepository`, a fazer | `OrdemProducaoRequestDTO`, `OrdemProducaoResponseDTO`, a fazer | `OrdemProducaoMapper`, a fazer | `OrdemProducaoService`, a fazer | `OrdemProducaoController`, a fazer |
-| `InspecaoQualidade` | `V3__criar_tabela_inspecoes_qualidade.sql`, a fazer | `InspecaoQualidade`, a fazer | `InspecaoQualidadeRepository`, a fazer | `InspecaoQualidadeRequestDTO`, `InspecaoQualidadeResponseDTO`, a fazer | `InspecaoQualidadeMapper`, a fazer | `InspecaoQualidadeService`, a fazer | `InspecaoQualidadeController`, a fazer |
+| `Equipamento` | `V1__criar_tabela_equipamentos.sql`, pronta | `Equipamento`, a fazer | `EquipamentoRepository`, a fazer | `EquipamentoRequestDTO`, `EquipamentoResponseDTO`, a fazer | `EquipamentoMapper`, a fazer | `EquipamentoService`, a fazer | `EquipamentoController`, a fazer |
+| `OrdemProducao` | `V2__criar_tabela_ordens_producao.sql`, pronta | `OrdemProducao`, a fazer | `OrdemProducaoRepository`, a fazer | `OrdemProducaoRequestDTO`, `OrdemProducaoResponseDTO`, a fazer | `OrdemProducaoMapper`, a fazer | `OrdemProducaoService`, a fazer | `OrdemProducaoController`, a fazer |
+| `InspecaoQualidade` | `V3__criar_tabela_inspecoes_qualidade.sql`, pronta | `InspecaoQualidade`, a fazer | `InspecaoQualidadeRepository`, a fazer | `InspecaoQualidadeRequestDTO`, `InspecaoQualidadeResponseDTO`, a fazer | `InspecaoQualidadeMapper`, a fazer | `InspecaoQualidadeService`, a fazer | `InspecaoQualidadeController`, a fazer |
 
 ## Entidades
 
