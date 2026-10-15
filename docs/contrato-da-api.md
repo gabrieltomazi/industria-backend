@@ -30,8 +30,8 @@ Coluna **Funciona**: `sim` para as rotas que já respondem nesta etapa: as da AP
 
 | Verbo | Caminho | O que faz | Entrada | Saída | Sucesso | Erros | Funciona |
 |---|---|---|---|---|---|---|---|
-| `GET` | `/ordens-producao` | Lista as ordens de produção | Nenhuma | lista de `OrdemProducaoResponseDTO` | `200` | Nenhum | não |
-| `GET` | `/ordens-producao/{id}` | Busca uma ordem pelo ID | Nenhuma | `OrdemProducaoResponseDTO` | `200` | `404` | não |
+| `GET` | `/ordens-producao` | Lista as ordens de produção | Nenhuma | lista de `OrdemProducaoResponseDTO` | `200` | Nenhum | sim |
+| `GET` | `/ordens-producao/{id}` | Busca uma ordem pelo ID | Nenhuma | `OrdemProducaoResponseDTO` | `200` | `404` | sim |
 | `POST` | `/ordens-producao` | Registra e inicia uma ordem de produção | `OrdemProducaoRequestDTO` | `OrdemProducaoResponseDTO` | `201` | `400`, `404` | sim |
 | `PUT` | `/ordens-producao/{id}` | Atualiza uma ordem | `OrdemProducaoRequestDTO` | `OrdemProducaoResponseDTO` | `200` | `400`, `404` | não |
 | `DELETE` | `/ordens-producao/{id}` | Remove uma ordem | Nenhuma | Nenhuma (sem corpo) | `204` | `404` | não |
@@ -40,8 +40,8 @@ Coluna **Funciona**: `sim` para as rotas que já respondem nesta etapa: as da AP
 
 | Verbo | Caminho | O que faz | Entrada | Saída | Sucesso | Erros | Funciona |
 |---|---|---|---|---|---|---|---|
-| `GET` | `/inspecoes-qualidade` | Lista as inspeções de qualidade | Nenhuma | lista de `InspecaoQualidadeResponseDTO` | `200` | Nenhum | não |
-| `GET` | `/inspecoes-qualidade/{id}` | Busca uma inspeção pelo ID | Nenhuma | `InspecaoQualidadeResponseDTO` | `200` | `404` | não |
+| `GET` | `/inspecoes-qualidade` | Lista as inspeções de qualidade | Nenhuma | lista de `InspecaoQualidadeResponseDTO` | `200` | Nenhum | sim |
+| `GET` | `/inspecoes-qualidade/{id}` | Busca uma inspeção pelo ID | Nenhuma | `InspecaoQualidadeResponseDTO` | `200` | `404` | sim |
 | `POST` | `/inspecoes-qualidade` | Registra uma inspeção de qualidade | `InspecaoQualidadeRequestDTO` | `InspecaoQualidadeResponseDTO` | `201` | `400`, `404` | sim |
 | `PUT` | `/inspecoes-qualidade/{id}` | Atualiza uma inspeção | `InspecaoQualidadeRequestDTO` | `InspecaoQualidadeResponseDTO` | `200` | `400`, `404` | não |
 | `DELETE` | `/inspecoes-qualidade/{id}` | Remove uma inspeção | Nenhuma | Nenhuma (sem corpo) | `204` | `404` | não |
