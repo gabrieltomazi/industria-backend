@@ -64,9 +64,9 @@ A API é organizada em camadas. Uma requisição entra pelo Controller, passa pe
 
 | Entidade | Migration | Model | Repository | DTOs | Mapper | Service | Controller |
 |---|---|---|---|---|---|---|---|
-| `Equipamento` | `V1__criar_tabela_equipamentos.sql`, pronta | `Equipamento`, a fazer | `EquipamentoRepository`, a fazer | `EquipamentoRequestDTO`, `EquipamentoResponseDTO`, a fazer | `EquipamentoMapper`, a fazer | `EquipamentoService`, a fazer | `EquipamentoController`, a fazer |
-| `OrdemProducao` | `V2__criar_tabela_ordens_producao.sql`, pronta | `OrdemProducao`, a fazer | `OrdemProducaoRepository`, a fazer | `OrdemProducaoRequestDTO`, `OrdemProducaoResponseDTO`, a fazer | `OrdemProducaoMapper`, a fazer | `OrdemProducaoService`, a fazer | `OrdemProducaoController`, a fazer |
-| `InspecaoQualidade` | `V3__criar_tabela_inspecoes_qualidade.sql`, pronta | `InspecaoQualidade`, a fazer | `InspecaoQualidadeRepository`, a fazer | `InspecaoQualidadeRequestDTO`, `InspecaoQualidadeResponseDTO`, a fazer | `InspecaoQualidadeMapper`, a fazer | `InspecaoQualidadeService`, a fazer | `InspecaoQualidadeController`, a fazer |
+| `Equipamento` | `V1__criar_tabela_equipamentos.sql`, pronta | `Equipamento`, pronta | `EquipamentoRepository`, pronta | `EquipamentoRequestDTO`, `EquipamentoResponseDTO`, pronta | `EquipamentoMapper`, implementada | `EquipamentoService`, implementada | `EquipamentoController`, implementada |
+| `OrdemProducao` | `V2__criar_tabela_ordens_producao.sql`, pronta | `OrdemProducao`, pronta | `OrdemProducaoRepository`, pronta | `OrdemProducaoRequestDTO`, `OrdemProducaoResponseDTO`, pronta | `OrdemProducaoMapper`, implementada | `OrdemProducaoService`, implementada | `OrdemProducaoController`, implementada |
+| `InspecaoQualidade` | `V3__criar_tabela_inspecoes_qualidade.sql`, pronta | `InspecaoQualidade`, pronta | `InspecaoQualidadeRepository`, pronta | `InspecaoQualidadeRequestDTO`, `InspecaoQualidadeResponseDTO`, pronta | `InspecaoQualidadeMapper`, implementada | `InspecaoQualidadeService`, implementada | `InspecaoQualidadeController`, implementada |
 
 ## Entidades
 
@@ -84,7 +84,15 @@ Atributos, tipos e o diagrama das tabelas estão em [docs/modelo-de-dominio.md](
 
 | Verbo | Caminho | O que faz | Regra | Sucesso | Erros |
 |---|---|---|---|---|---|
-| ... | ... | ... | ... | ... | ... |
+| `POST` | `/equipamentos` | Cadastra um equipamento | — | `201` | `400` |
+| `GET` | `/equipamentos` | Lista todos os equipamentos | — | `200` | Nenhum |
+| `GET` | `/equipamentos/{id}` | Busca um equipamento pelo ID | — | `200` | `404` |
+| `POST` | `/ordens-producao` | Registra e inicia uma ordem de produção | R1 | `201` | `400`, `404` |
+| `GET` | `/ordens-producao` | Lista todas as ordens de produção | — | `200` | Nenhum |
+| `GET` | `/ordens-producao/{id}` | Busca uma ordem de produção pelo ID | — | `200` | `404` |
+| `POST` | `/inspecoes-qualidade` | Registra uma inspeção de qualidade | R2, R3 | `201` | `400`, `404` |
+| `GET` | `/inspecoes-qualidade` | Lista todas as inspeções de qualidade | — | `200` | Nenhum |
+| `GET` | `/inspecoes-qualidade/{id}` | Busca uma inspeção de qualidade pelo ID | — | `200` | `404` |
 
 Exemplo de requisição:
 
