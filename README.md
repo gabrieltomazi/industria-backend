@@ -131,7 +131,16 @@ Um campo inválido também devolve `400`, com a lista `campos` dizendo qual camp
 
 ### As planejadas
 
-Estão no contrato, mas ainda não respondem nesta primeira etapa: `PUT /equipamentos/{id}`, `DELETE /equipamentos/{id}`, `GET /ordens-producao`, etc.
+Estão no contrato, mas ainda não respondem nesta primeira etapa:
+
+| Recurso | O que vai fazer |
+|---|---|
+| `PUT /equipamentos/{id}` | Atualiza dados cadastrais ou estado de um equipamento |
+| `DELETE /equipamentos/{id}` | Remove um equipamento cadastrado |
+| `PUT /ordens-producao/{id}` | Atualiza dados ou altera o estado de uma ordem de produção |
+| `DELETE /ordens-producao/{id}` | Cancela e remove uma ordem de produção |
+| `PUT /inspecoes-qualidade/{id}` | Corrige dados de uma inspeção de qualidade realizada |
+| `DELETE /inspecoes-qualidade/{id}` | Remove o registro de uma inspeção de qualidade |
 
 O contrato completo, com todas as rotas e os DTOs, está em [docs/contrato-da-api.md](docs/contrato-da-api.md).
 
@@ -165,6 +174,10 @@ Para parar: `Ctrl+C` na API e `docker compose stop` no banco. Para apagar o banc
 | Desenho | Completo: problema e regras neste README, modelo e contrato em docs/ |
 | Estrutura | Em andamento: migrations, entidades, repositories, DTOs, mappers, services e controllers das 3 entidades |
 | API e regras | Em andamento: API simples de equipamentos e implementação de R1, R2 e R3 |
+
+### Com mais tempo (Próximos passos)
+- **Frontend simples (Dashboard operacional):** Uma interface web visual para o chão de fábrica, permitindo que operadores apontem a produção, registrem inspeções e o supervisor visualize em tempo real quais máquinas estão com `MANUTENCAO_PENDENTE` (sem depender do Swagger ou Postman).
+- **CRUD completo:** Implementar as rotas de edição e exclusão (`PUT` e `DELETE`) planejadas no contrato.
 
 ## Documentação
 
