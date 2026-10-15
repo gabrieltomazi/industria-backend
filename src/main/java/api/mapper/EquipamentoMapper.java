@@ -7,6 +7,9 @@ import api.dto.EquipamentoResponseDTO;
 import api.model.Equipamento;
 import org.springframework.stereotype.Component;
 
+// camada: mapper
+// responsabilidade: conversão entre dto e entidade para equipamento.
+// situação: implementada.
 @Component
 public class EquipamentoMapper {
 
@@ -14,12 +17,12 @@ public class EquipamentoMapper {
     public Equipamento toEntity(EquipamentoRequestDTO dto) {
         Equipamento equipamento = new Equipamento();
 
-        equipamento.setNome(dto.getNome());
-        equipamento.setCodigo(dto.getCodigo());
-        equipamento.setSetor(dto.getSetor());
+        equipamento.setNome(dto.nome());
+        equipamento.setCodigo(dto.codigo());
+        equipamento.setSetor(dto.setor());
 
-        if (dto.getEstado() != null) {
-            equipamento.setEstado(dto.getEstado());
+        if (dto.estado() != null) {
+            equipamento.setEstado(dto.estado());
         }
 
         return equipamento;

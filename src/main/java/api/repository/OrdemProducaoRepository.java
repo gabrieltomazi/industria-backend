@@ -5,7 +5,9 @@ import org.springframework.stereotype.Repository;
 
 import api.model.OrdemProducao;
 
-// repositório spring data jpa para a entidade ordemproducao
+// camada: repository
+// responsabilidade: operações de banco de dados para a entidade ordemproducao.
+// situação: implementada.
 @Repository
 public interface OrdemProducaoRepository extends JpaRepository<OrdemProducao, Long> {
 }

@@ -45,8 +45,7 @@ public class InspecaoQualidadeService {
     public InspecaoQualidadeResponseDTO cadastrar(InspecaoQualidadeRequestDTO dto) {
         // busca a ordem de produção associada ou lança 404
         OrdemProducao ordem = ordemProducaoRepository.findById(dto.ordemProducaoId())
-                .orElseThrow(() -> new RecursoNaoEncontradoException(
-                        "Ordem de produção não encontrada: " + dto.ordemProducaoId()));
+                .orElseThrow(() -> new OrdemProducaoNaoEncontradaException(dto.ordemProducaoId()));
 
         // r2: a quantidade inspecionada não pode ser superior à quantidade produzida na ordem
         if (dto.quantidadeInspecionada() > ordem.getQuantidadeProduzida()) {
@@ -85,8 +84,7 @@ public class InspecaoQualidadeService {
     // busca uma inspeção pelo seu identificador ou lança 404
     public InspecaoQualidadeResponseDTO buscarPorId(Long id) {
         InspecaoQualidade inspecao = repository.findById(id)
-                .orElseThrow(() -> new RecursoNaoEncontradoException(
-                        "Inspeção de qualidade não encontrada: " + id));
+                .orElseThrow(() -> new InspecaoQualidadeNaoEncontradaException(id));
 
         return mapper.toResponse(inspecao);
     }

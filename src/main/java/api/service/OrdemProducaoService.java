@@ -38,8 +38,7 @@ public class OrdemProducaoService {
     public OrdemProducaoResponseDTO cadastrar(OrdemProducaoRequestDTO dto) {
         // busca o equipamento associado ou lança 404
         Equipamento equipamento = equipamentoRepository.findById(dto.equipamentoId())
-                .orElseThrow(() -> new RecursoNaoEncontradoException(
-                        "Equipamento não encontrado: " + dto.equipamentoId()));
+                .orElseThrow(() -> new EquipamentoNaoEncontradoException(dto.equipamentoId()));
 
         // r1: uma ordem de produção só pode ser iniciada se o equipamento associado estiver no estado ativo
         if (equipamento.getEstado() != EstadoEquipamento.ATIVO) {
@@ -65,8 +64,7 @@ public class OrdemProducaoService {
     // busca uma ordem de produção pelo id ou lança 404
     public OrdemProducaoResponseDTO buscarPorId(Long id) {
         OrdemProducao ordem = repository.findById(id)
-                .orElseThrow(() -> new RecursoNaoEncontradoException(
-                        "Ordem de produção não encontrada: " + id));
+                .orElseThrow(() -> new OrdemProducaoNaoEncontradaException(id));
 
         return mapper.toResponse(ordem);
     }

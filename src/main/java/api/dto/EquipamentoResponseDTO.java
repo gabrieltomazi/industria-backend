@@ -1,46 +1,24 @@
-
 package api.dto;
 
 import api.model.EstadoEquipamento;
+import io.swagger.v3.oas.annotations.media.Schema;
 
-public class EquipamentoResponseDTO {
+// dados devolvidos após cadastrar ou consultar um equipamento
+public record EquipamentoResponseDTO(
 
-    private Long id;
-    private String nome;
-    private String codigo;
-    private String setor;
-    private EstadoEquipamento estado;
+        @Schema(description = "identificador gerado pelo banco", example = "1")
+        Long id,
 
-    public EquipamentoResponseDTO(
-            Long id,
-            String nome,
-            String codigo,
-            String setor,
-            EstadoEquipamento estado) {
-        this.id = id;
-        this.nome = nome;
-        this.codigo = codigo;
-        this.setor = setor;
-        this.estado = estado;
-    }
+        @Schema(description = "nome do equipamento", example = "Torno CNC 01")
+        String nome,
 
-    public Long getId() {
-        return id;
-    }
+        @Schema(description = "código único do equipamento", example = "EQ-1001")
+        String codigo,
 
-    public String getNome() {
-        return nome;
-    }
+        @Schema(description = "setor onde o equipamento opera", example = "Usinagem")
+        String setor,
 
-    public String getCodigo() {
-        return codigo;
-    }
-
-    public String getSetor() {
-        return setor;
-    }
-
-    public EstadoEquipamento getEstado() {
-        return estado;
-    }
+        @Schema(description = "estado operacional do equipamento", example = "ATIVO")
+        EstadoEquipamento estado
+) {
 }

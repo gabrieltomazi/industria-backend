@@ -45,9 +45,7 @@ public class EquipamentoService {
 
     public EquipamentoResponseDTO buscarPorId(Long id) {
         Equipamento equipamento = repository.findById(id)
-                .orElseThrow(() ->
-                        new RecursoNaoEncontradoException(
-                                "Equipamento não encontrado: " + id));
+                .orElseThrow(() -> new EquipamentoNaoEncontradoException(id));
 
         return mapper.toResponse(equipamento);
     }

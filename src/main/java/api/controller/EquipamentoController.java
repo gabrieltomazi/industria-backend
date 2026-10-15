@@ -12,6 +12,10 @@ import api.dto.EquipamentoResponseDTO;
 import api.service.EquipamentoService;
 import jakarta.validation.Valid;
 
+// camada: controller
+// responsabilidade: porta de entrada http para as operações de equipamentos industriais.
+// rotas atendidas: as de /equipamentos em docs/contrato-da-api.md.
+// situação: implementada.
 @RestController
 @RequestMapping("/equipamentos")
 public class EquipamentoController {
