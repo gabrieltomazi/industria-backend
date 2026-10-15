@@ -21,7 +21,7 @@ public class InspecaoQualidade {
     private Long id;
 
     // relacionamento muitos para um com a ordem de produção inspecionada
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "ordem_producao_id", nullable = false)
     private OrdemProducao ordemProducao;
 

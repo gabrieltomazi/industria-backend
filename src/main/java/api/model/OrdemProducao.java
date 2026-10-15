@@ -38,7 +38,7 @@ public class OrdemProducao {
     private EstadoOrdemProducao estado = EstadoOrdemProducao.CRIADA;
 
     // relacionamento com o equipamento onde a ordem é executada
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "equipamento_id", nullable = false)
     private Equipamento equipamento;
 

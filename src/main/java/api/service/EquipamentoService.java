@@ -11,6 +11,9 @@ import api.mapper.EquipamentoMapper;
 import api.model.Equipamento;
 import api.repository.EquipamentoRepository;
 
+// camada: service
+// responsabilidade: regras e operações dos equipamentos industriais.
+// rotas atendidas: as de /equipamentos em docs/contrato-da-api.md.
 @Service
 public class EquipamentoService {
 
@@ -27,16 +30,16 @@ public class EquipamentoService {
     public EquipamentoResponseDTO cadastrar(
             EquipamentoRequestDTO dto) {
 
-        Equipamento equipamento = mapper.paraEntidade(dto);
+        Equipamento equipamento = mapper.toEntity(dto);
         Equipamento equipamentoSalvo = repository.save(equipamento);
 
-        return mapper.paraDTO(equipamentoSalvo);
+        return mapper.toResponse(equipamentoSalvo);
     }
 
     public List<EquipamentoResponseDTO> listar() {
         return repository.findAll()
                 .stream()
-                .map(mapper::paraDTO)
+                .map(mapper::toResponse)
                 .toList();
     }
 
@@ -46,6 +49,6 @@ public class EquipamentoService {
                         new RecursoNaoEncontradoException(
                                 "Equipamento não encontrado: " + id));
 
-        return mapper.paraDTO(equipamento);
+        return mapper.toResponse(equipamento);
     }
 }
