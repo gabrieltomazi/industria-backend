@@ -38,7 +38,7 @@ public class InspecaoQualidade {
     private String observacoes;
 
     // construtor sem argumentos exigido pelo hibernate
-    protected InspecaoQualidade() {
+    public InspecaoQualidade() {
     }
 
     public InspecaoQualidade(Long id, OrdemProducao ordemProducao, Integer quantidadeInspecionada,
